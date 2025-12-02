@@ -62,21 +62,21 @@ function RoutePolyline({ path }: { path: string[] }) {
 export default function CampusMap({ selectedRoomId, path, onRoomSelect }: CampusMapProps) {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
-  useEffect(() => {
-    const init = async () => {
-      if (!svgRef.current) return;
-      const svgPanZoom = (await import("svg-pan-zoom")).default;
+  // useEffect(() => {
+  //   const init = async () => {
+  //     if (!svgRef.current) return;
+  //     const svgPanZoom = (await import("svg-pan-zoom")).default;
 
-      svgPanZoom(svgRef.current, {
-        zoomEnabled: true,
-        controlIconsEnabled: true,
-        minZoom: 0.75,
-        maxZoom: 1.5,
-      });
-    };
+  //     svgPanZoom(svgRef.current, {
+  //       zoomEnabled: true,
+  //       controlIconsEnabled: true,
+  //       minZoom: 0.75,
+  //       maxZoom: 1.5,
+  //     });
+  //   };
 
-    init();
-  }, [onRoomSelect]);
+  //   // init();
+  // }, [onRoomSelect]);
 
   return (
     <div className="relative">
@@ -116,7 +116,7 @@ export default function CampusMap({ selectedRoomId, path, onRoomSelect }: Campus
             </g>
           ))}
           {path && path.length > 0 && <RoutePolyline path={path} />}
-          {HALLWAY_NODES.map((node: any) => (
+          {/* {HALLWAY_NODES.map((node: any) => (
             <circle
               key={node.id}
               cx={node.x}
@@ -141,7 +141,7 @@ export default function CampusMap({ selectedRoomId, path, onRoomSelect }: Campus
             >
               <title>{node.id}</title>
             </circle>
-          ))}
+          ))} */}
         </g>
       </svg>
     </div>

@@ -97,7 +97,7 @@ export const ROOMS: Room[] = [
     stroke: "#2546AB",
     doors: [
       { id: "washroom-door-1", x: 775, y: 1196 },
-      { id: "washroom-door-2", x: 757, y: 1260 },
+      // { id: "washroom-door-2", x: 757, y: 1260 },
     ],
     element: (
       <>
@@ -150,6 +150,7 @@ export const ROOMS: Room[] = [
     name: "Main Staircase",
     fill: "#B5F1C2",
     stroke: "#429554",
+    doors: [{ id: "staircase-door", x: 618, y: 1370 }],
     element: (
       <>
         <path

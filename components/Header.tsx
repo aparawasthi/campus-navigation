@@ -14,7 +14,7 @@ export default function header() {
           />
           <p className="text-blue-100">Find your way around campus easily</p>
         </div>
-        <nav className="flex items-center gap-8">
+        <nav className="hidden md:flex items-center gap-8 ">
           <a href="https://www.dituniversity.edu.in/" className="text-white text-base">
             About Us
           </a>
