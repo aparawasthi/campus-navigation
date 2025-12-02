@@ -8,6 +8,25 @@ import { ROOMS } from "@/data/rooms";
 import { cn } from "@/lib/utils";
 import { ROUTING_GRAPH } from "@/data/routingGraph";
 import { dijkstra } from "@/utils/pathfinding";
+import { useSearchParams } from "next/navigation";
+
+function getPathDistance(path: string[]) {
+  let dist = 0;
+
+  for (let i = 0; i < path.length - 1; i++) {
+    const a = ROUTING_GRAPH.nodes.find((n) => n.id === path[i]);
+    const b = ROUTING_GRAPH.nodes.find((n) => n.id === path[i + 1]);
+
+    if (!a || !b) continue;
+
+    const dx = a.x - b.x;
+    const dy = a.y - b.y;
+
+    dist += Math.sqrt(dx * dx + dy * dy);
+  }
+
+  return dist;
+}
 
 function getShortestPath(roomA: string, roomB: string) {
   const rA = ROOMS.find((r) => r.id === roomA);
@@ -16,12 +35,29 @@ function getShortestPath(roomA: string, roomB: string) {
   if (!rA?.doors?.length || !rB?.doors?.length) return [];
 
   const start = rA.doors[0].id;
-  const end = rB.doors[0].id;
 
-  return dijkstra(start, end, ROUTING_GRAPH.edges);
+  let bestPath: string[] = [];
+  let bestDistance = Infinity;
+
+  for (const doorB of rB.doors) {
+    const endDoor = doorB.id;
+
+    const path = dijkstra(start, endDoor, ROUTING_GRAPH.edges);
+    if (path.length === 0) continue;
+
+    const distance = getPathDistance(path);
+
+    if (distance < bestDistance) {
+      bestDistance = distance;
+      bestPath = path;
+    }
+  }
+  return bestPath;
 }
 
 export default function MapPage() {
+  const searchParams = useSearchParams();
+  const entrance = searchParams.get("entrance");
   const [query, setQuery] = useState("");
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
   const [path, setPath] = useState<string[] | null>(null);
@@ -33,7 +69,7 @@ export default function MapPage() {
 
   const handleSelect = (room: Room) => {
     setSelectedRoom(room);
-
+    setQuery("");
     const el = document.getElementById(room.id);
     if (el) {
       el.scrollIntoView({ behavior: "smooth", block: "center" });
@@ -42,11 +78,12 @@ export default function MapPage() {
 
   const clearSelection = () => {
     setSelectedRoom(null);
+    setPath(null);
   };
 
   const handleStartNavigation = () => {
     if (selectedRoom) {
-      const newPath = getShortestPath("exhibition-area", selectedRoom.id);
+      const newPath = getShortestPath(entrance || "exhibition-area", selectedRoom.id);
       setPath(newPath);
     }
   };

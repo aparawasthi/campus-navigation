@@ -6,6 +6,7 @@ export const ROOMS: Room[] = [
     name: "Backside Staircase",
     fill: "#B5F1C2",
     stroke: "#429554",
+    doors: [{ id: "backside-staircase", x: 508, y: 207 }],
     element: (
       <>
         <path
@@ -36,6 +37,7 @@ export const ROOMS: Room[] = [
     name: "Lift",
     fill: "#B5F1C2",
     stroke: "#429554",
+    doors: [{ id: "lift-door", x: 649, y: 244 }],
     element: (
       <>
         <path
@@ -64,9 +66,9 @@ export const ROOMS: Room[] = [
     stroke: "#AA30CB",
     doors: [
       {
-        id: "exhibition-area-door",
-        x: 336,
-        y: 1306,
+        id: "exhibition-entrance-1",
+        x: 342,
+        y: 1292,
       },
     ],
     element: (
@@ -93,6 +95,10 @@ export const ROOMS: Room[] = [
     name: "Washroom",
     fill: "#CBD6FA",
     stroke: "#2546AB",
+    doors: [
+      { id: "washroom-door-1", x: 775, y: 1196 },
+      { id: "washroom-door-2", x: 757, y: 1260 },
+    ],
     element: (
       <>
         <path
@@ -119,7 +125,7 @@ export const ROOMS: Room[] = [
     name: "Model Sampling Lab",
     fill: "#BCFCFF",
     stroke: "#25A6AB",
-    doors: [{ id: "model-sampling-lab-door", x: 840, y: 1020 }],
+    doors: [{ id: "model-sampling-lab-door", x: 843, y: 994 }],
     element: (
       <>
         <path
@@ -168,7 +174,7 @@ export const ROOMS: Room[] = [
     name: "Office",
     fill: "#F3D2D2",
     stroke: "#CB7777",
-    doors: [{ id: "office-door", x: 490, y: 1070 }],
+    doors: [{ id: "office-door", x: 518, y: 1057 }],
     element: (
       <>
         <path
@@ -190,7 +196,7 @@ export const ROOMS: Room[] = [
     name: "Computer Lab",
     fill: "#EFC7A2",
     stroke: "#D6873E",
-    doors: [{ id: "computer-lab-door", x: 490, y: 790 }],
+    doors: [{ id: "computer-lab-door", x: 518, y: 786 }],
     element: (
       <>
         <path
@@ -213,8 +219,8 @@ export const ROOMS: Room[] = [
     fill: "#E9F5C2",
     stroke: "#B3D63E",
     doors: [
-      { id: "seminar-hall-door-1", x: 650, y: 405 },
-      { id: "seminar-hall-door-2", x: 723, y: 760 },
+      { id: "seminar-hall-door-1", x: 733, y: 766 },
+      { id: "seminar-hall-door-2", x: 647, y: 393 },
     ],
     element: (
       <>
@@ -240,7 +246,7 @@ export const ROOMS: Room[] = [
     name: "Staff Lounge",
     fill: "#F8F5A8",
     stroke: "#EBE52D",
-    doors: [{ id: "staff-lounge-door", x: 900, y: 793 }],
+    doors: [{ id: "staff-lounge-door", x: 891, y: 790 }],
     element: (
       <>
         <path
@@ -265,6 +271,13 @@ export const ROOMS: Room[] = [
     name: "Back Exit",
     fill: "#D9D9D9",
     stroke: "black",
+    doors: [
+      {
+        id: "back-exit-door",
+        x: 582,
+        y: 385,
+      },
+    ],
     element: (
       <>
         <path

@@ -13,6 +13,23 @@ interface CampusMapProps {
   path: string[] | null;
   onRoomSelect?: (room: Room) => void;
 }
+// const DOOR_NODES = [
+//   { id: "door-node-1", x: 342, y: 1292 },
+//   { id: "door-node-2", x: 518, y: 1057 },
+//   { id: "door-node-3", x: 518, y: 786 },
+//   { id: "door-node-4", x: 582, y: 405 },
+//   { id: "door-node-5", x: 733, y: 766 },
+//   { id: "door-node-6", x: 647, y: 393 },
+//   { id: "door-node-7", x: 649, y: 329 },
+//   { id: "door-node-8", x: 508, y: 329 },
+//   { id: "door-node-9", x: 649, y: 244 },
+//   { id: "door-node-10", x: 508, y: 207 },
+//   { id: "door-node-11", x: 891, y: 790 },
+//   { id: "door-node-12", x: 843, y: 994 },
+//   { id: "door-node-13", x: 775, y: 1196 },
+//   { id: "door-node-14", x: 757, y: 1260 },
+// ];
+
 const DOOR_NODES = getDoorNodes();
 
 function RoutePolyline({ path }: { path: string[] }) {
@@ -34,6 +51,10 @@ function RoutePolyline({ path }: { path: string[] }) {
       fill="none"
       strokeLinejoin="round"
       strokeLinecap="round"
+      strokeDasharray="12 14"
+      style={{
+        animation: "dashmove 1s linear infinite",
+      }}
     />
   );
 }
@@ -103,7 +124,7 @@ export default function CampusMap({ selectedRoomId, path, onRoomSelect }: Campus
               r="10"
               fill="blue"
               stroke="black"
-              stroke-width="0"
+              strokeWidth="0"
             >
               <title>{node.id}</title>
             </circle>
@@ -116,7 +137,7 @@ export default function CampusMap({ selectedRoomId, path, onRoomSelect }: Campus
               r="10"
               fill="red"
               stroke="black"
-              stroke-width="0"
+              strokeWidth="0"
             >
               <title>{node.id}</title>
             </circle>
