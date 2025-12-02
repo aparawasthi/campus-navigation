@@ -108,7 +108,7 @@ function MapPage() {
       {isNavigating && selectedRoom ? (
         <div className="grid grid-cols-1 lg:grid-cols-8 gap-6 p-4 md:p-12">
           {/* Turn-by-Turn Directions */}
-          <div className="lg:col-span-2 space-y-4">
+          <div className="lg:col-span-2 space-y-4 order-2 md:order-0">
             {/* Current Step Card */}
             <div className="bg-gradient-to-br from-blue-600 to-blue-700 text-white rounded-xl shadow-lg p-6">
               <div className="flex-1">
@@ -286,7 +286,7 @@ function MapPage() {
               </div>
 
               {/* Legend */}
-              <div className="p-4 border-t border-gray-200 bg-gray-50">
+              {/* <div className="p-4 border-t border-gray-200 bg-gray-50">
                 <p className="text-sm text-gray-600 mb-3">Legend:</p>
                 <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
                   {ROOMS.map((room) => (
@@ -302,7 +302,7 @@ function MapPage() {
                     </div>
                   ))}
                 </div>
-              </div>
+              </div> */}
             </div>
 
             {/* Quick Links */}
@@ -333,14 +333,19 @@ function MapPage() {
             </div>
 
             {/* Room List */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
+            <div
+              className={cn(
+                "bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden md:block",
+                selectedRoom && "hidden"
+              )}
+            >
               <div className="p-4 border-b border-gray-200">
                 <h3 className="text-gray-900">Available Locations</h3>
                 <p className="text-sm text-gray-600 mt-1">
                   {filteredRooms.length} location{filteredRooms.length !== 1 ? "s" : ""} found
                 </p>
               </div>
-              <div className="max-h-[600px] overflow-y-auto">
+              <div className={cn("max-h-[600px] overflow-y-auto")}>
                 {filteredRooms.length > 0 ? (
                   <div className="divide-y divide-gray-200">
                     {filteredRooms.map((room) => (

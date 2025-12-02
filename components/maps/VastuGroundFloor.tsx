@@ -120,7 +120,11 @@ export default function CampusMap({
                 selectedRoomId === room.id && "selected-room",
                 isNavigating && "navigation-mode"
               )}
-              onClick={() => onRoomSelect?.(room)}
+              onClick={() => {
+                if (!isNavigating) {
+                  onRoomSelect?.(room);
+                }
+              }}
             >
               {room.element}
             </g>
