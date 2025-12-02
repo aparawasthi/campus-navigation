@@ -5,10 +5,26 @@ import CampusMap from "@/components/maps/VastuGroundFloor";
 import Search from "@/components/Search";
 import type { Room } from "@/types/Room";
 import { ROOMS } from "@/data/rooms";
+import { cn } from "@/lib/utils";
+import { ROUTING_GRAPH } from "@/data/routingGraph";
+import { dijkstra } from "@/utils/pathfinding";
+
+function getShortestPath(roomA: string, roomB: string) {
+  const rA = ROOMS.find((r) => r.id === roomA);
+  const rB = ROOMS.find((r) => r.id === roomB);
+
+  if (!rA?.doors?.length || !rB?.doors?.length) return [];
+
+  const start = rA.doors[0].id;
+  const end = rB.doors[0].id;
+
+  return dijkstra(start, end, ROUTING_GRAPH.edges);
+}
 
 export default function MapPage() {
   const [query, setQuery] = useState("");
   const [selectedRoom, setSelectedRoom] = useState<Room | null>(null);
+  const [path, setPath] = useState<string[] | null>(null);
 
   const filteredRooms = useMemo(() => {
     if (!query) return ROOMS;
@@ -28,22 +44,16 @@ export default function MapPage() {
     setSelectedRoom(null);
   };
 
+  const handleStartNavigation = () => {
+    if (selectedRoom) {
+      const newPath = getShortestPath("exhibition-area", selectedRoom.id);
+      setPath(newPath);
+    }
+  };
+
   return (
-    // <div className="flex flex-col items-center gap-8 p-6">
-    //   <div className="w-full max-w-lg mx-auto text-center">
-    //     <Search onSelect={handleSelect} />
-    //     {selectedRoom && (
-    //       <p className="mt-4 text-gray-700">
-    //         Selected: <strong>{selectedRoom.name}</strong>
-    //       </p>
-    //     )}
-    //   </div>
-    //   <div className="border rounded shadow p-1 md:max-w-[80vw] overflow-hidden">
-    //     <CampusMap selectedRoomId={selectedRoom?.id} onRoomSelect={handleSelect} />
-    //   </div>
-    // </div>
-    <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 p-4 md:p-12">
-      <div className="lg:col-span-1 space-y-4">
+    <div className="grid grid-cols-1 lg:grid-cols-8 gap-6 p-4 md:p-12">
+      <div className="lg:col-span-2 space-y-4">
         {/* Search Box */}
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 p-4">
           <h3 className="text-gray-900 mb-4">Search Location</h3>
@@ -134,7 +144,7 @@ export default function MapPage() {
                 <p className="text-gray-900">Description</p>
               </div>
               <button
-                // onClick={handleStartNavigation}
+                onClick={handleStartNavigation}
                 className="w-full bg-blue-600 text-white py-2 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2 mt-4"
               >
                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -152,7 +162,7 @@ export default function MapPage() {
         )}
       </div>
 
-      <div className="lg:col-span-2">
+      <div className="lg:col-span-6">
         <div className="bg-white rounded-xl shadow-sm border border-gray-200 overflow-hidden">
           <div className="p-4 border-b border-gray-200 flex items-center justify-between">
             <div>
@@ -173,7 +183,11 @@ export default function MapPage() {
                 className="relative transition-all duration-300"
                 // style={{ filter: highlightedRoom ? "brightness(0.7)" : "none" }}
               >
-                <CampusMap selectedRoomId={selectedRoom?.id} onRoomSelect={handleSelect} />
+                <CampusMap
+                  selectedRoomId={selectedRoom?.id}
+                  path={path}
+                  onRoomSelect={handleSelect}
+                />
               </div>
             </div>
           </div>
@@ -184,7 +198,13 @@ export default function MapPage() {
             <div className="grid grid-cols-2 md:grid-cols-4 gap-3">
               {ROOMS.map((room) => (
                 <div className="flex items-center gap-2" key={room.id}>
-                  <div className={`w-4 h-4 bg-[${room.fill}] border border-[${room.stroke}] rounded`}></div>
+                  <div
+                    className={cn("w-4 h-4 border rounded")}
+                    style={{
+                      backgroundColor: room.fill,
+                      borderColor: room.stroke,
+                    }}
+                  ></div>
                   <span className="text-xs text-gray-700">{room.name}</span>
                 </div>
               ))}
