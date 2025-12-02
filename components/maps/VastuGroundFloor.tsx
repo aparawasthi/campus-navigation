@@ -10,6 +10,7 @@ import { getDoorNodes } from "@/utils/getDoorNodes";
 
 interface CampusMapProps {
   selectedRoomId?: RoomId | null;
+  isNavigating?: boolean;
   path: string[] | null;
   onRoomSelect?: (room: Room) => void;
 }
@@ -59,7 +60,12 @@ function RoutePolyline({ path }: { path: string[] }) {
   );
 }
 
-export default function CampusMap({ selectedRoomId, path, onRoomSelect }: CampusMapProps) {
+export default function CampusMap({
+  selectedRoomId,
+  isNavigating = false,
+  path,
+  onRoomSelect,
+}: CampusMapProps) {
   const svgRef = useRef<SVGSVGElement | null>(null);
 
   // useEffect(() => {
@@ -86,7 +92,7 @@ export default function CampusMap({ selectedRoomId, path, onRoomSelect }: Campus
         viewBox="0 0 1298 1595"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
-        className="w-full aspect-[1298/1595]"
+        className={cn("w-full aspect-[1298/1595]")}
       >
         <g id="vastu-map">
           <path
@@ -109,7 +115,11 @@ export default function CampusMap({ selectedRoomId, path, onRoomSelect }: Campus
             <g
               key={room.id}
               id={room.id}
-              className={cn("room", selectedRoomId === room.id && "selected-room")}
+              className={cn(
+                "room",
+                selectedRoomId === room.id && "selected-room",
+                isNavigating && "navigation-mode"
+              )}
               onClick={() => onRoomSelect?.(room)}
             >
               {room.element}

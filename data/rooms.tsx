@@ -4,6 +4,8 @@ export const ROOMS: Room[] = [
   {
     id: "backside-staircase",
     name: "Backside Staircase",
+    floor: "Ground Floor",
+    type: "Staircase",
     fill: "#B5F1C2",
     stroke: "#429554",
     doors: [{ id: "backside-staircase", x: 508, y: 207 }],
@@ -35,6 +37,8 @@ export const ROOMS: Room[] = [
   {
     id: "lift",
     name: "Lift",
+    floor: "Ground Floor",
+    type: "Lift",
     fill: "#B5F1C2",
     stroke: "#429554",
     doors: [{ id: "lift-door", x: 649, y: 244 }],
@@ -62,6 +66,8 @@ export const ROOMS: Room[] = [
   {
     id: "exhibition-area",
     name: "Exhibition Area",
+    floor: "Ground Floor",
+    type: "Hallway",
     fill: "#F5CFFF",
     stroke: "#AA30CB",
     doors: [
@@ -93,6 +99,8 @@ export const ROOMS: Room[] = [
   {
     id: "washroom",
     name: "Washroom",
+    floor: "Ground Floor",
+    type: "Washroom",
     fill: "#CBD6FA",
     stroke: "#2546AB",
     doors: [
@@ -123,6 +131,8 @@ export const ROOMS: Room[] = [
   {
     id: "model-sampling-lab",
     name: "Model Sampling Lab",
+    floor: "Ground Floor",
+    type: "Lab",
     fill: "#BCFCFF",
     stroke: "#25A6AB",
     doors: [{ id: "model-sampling-lab-door", x: 843, y: 994 }],
@@ -148,6 +158,8 @@ export const ROOMS: Room[] = [
   {
     id: "staircase",
     name: "Main Staircase",
+    floor: "Ground Floor",
+    type: "Staircase",
     fill: "#B5F1C2",
     stroke: "#429554",
     doors: [{ id: "staircase-door", x: 618, y: 1370 }],
@@ -173,6 +185,8 @@ export const ROOMS: Room[] = [
   {
     id: "office",
     name: "Office",
+    floor: "Ground Floor",
+    type: "Office",
     fill: "#F3D2D2",
     stroke: "#CB7777",
     doors: [{ id: "office-door", x: 518, y: 1057 }],
@@ -195,6 +209,8 @@ export const ROOMS: Room[] = [
   {
     id: "computer-lab",
     name: "Computer Lab",
+    floor: "Ground Floor",
+    type: "Lab",
     fill: "#EFC7A2",
     stroke: "#D6873E",
     doors: [{ id: "computer-lab-door", x: 518, y: 786 }],
@@ -217,6 +233,8 @@ export const ROOMS: Room[] = [
   {
     id: "seminar-hall",
     name: "Seminar Hall",
+    floor: "Ground Floor",
+    type: "Hall",
     fill: "#E9F5C2",
     stroke: "#B3D63E",
     doors: [
@@ -245,6 +263,8 @@ export const ROOMS: Room[] = [
   {
     id: "staff-lounge",
     name: "Staff Lounge",
+    floor: "Ground Floor",
+    type: "Lounge",
     fill: "#F8F5A8",
     stroke: "#EBE52D",
     doors: [{ id: "staff-lounge-door", x: 891, y: 790 }],
@@ -270,6 +290,8 @@ export const ROOMS: Room[] = [
   {
     id: "back-exit",
     name: "Back Exit",
+    floor: "Ground Floor",
+    type: "Exit",
     fill: "#D9D9D9",
     stroke: "black",
     doors: [

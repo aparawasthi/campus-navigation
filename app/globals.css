@@ -140,8 +140,16 @@
 .room {
   @apply cursor-pointer;
 
-  text {
-    display: none;
+  &.navigation-mode {
+    &:not(.selected-room) {
+      path {
+        stroke: var(--color-gray-300) !important;
+        fill: var(--color-gray-200) !important;
+      }
+    }
+    text {
+      display: none;
+    }
   }
 }
 
@@ -149,13 +157,15 @@
 
   /* stroke: var(--color-red-400) !important;
   fill: var(--color-red-300) !important; */
-  path {
-    stroke: var(--color-red-400) !important;
-    fill: var(--color-red-300) !important;
-  }
+  &:not(.navigation-mode) {
+    path {
+      stroke: var(--color-red-400) !important;
+      fill: var(--color-red-300) !important;
+    }
+  } 
 
   text {
-    display: block;
+    display: block !important;
   }
 }
 @keyframes dashmove {
