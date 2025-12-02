@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useState, useMemo, Suspense } from "react";
 import CampusMap from "@/components/maps/VastuGroundFloor";
 import Search from "@/components/Search";
 import type { Room } from "@/types/Room";
@@ -55,7 +55,15 @@ function getShortestPath(roomA: string, roomB: string) {
   return bestPath;
 }
 
-export default function MapPage() {
+export default function Home() {
+  return (
+    <Suspense>
+      <MapPage />
+    </Suspense>
+  );
+}
+
+function MapPage() {
   const searchParams = useSearchParams();
   const entrance = searchParams.get("entrance");
   const [query, setQuery] = useState("");
