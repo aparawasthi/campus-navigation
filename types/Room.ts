@@ -5,6 +5,7 @@ export type RoomId = "backside-staircase" | "lift" | "exhibition-area" | "washro
 export interface Room {
   id: RoomId;
   name: string;
+  tags: string[];
   floor: string;
   type: string;
   fill: string;

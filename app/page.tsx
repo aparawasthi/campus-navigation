@@ -75,7 +75,7 @@ function MapPage() {
 
   const filteredRooms = useMemo(() => {
     if (!query) return ROOMS;
-    return ROOMS.filter((room) => room.name.toLowerCase().includes(query.toLowerCase()));
+    return ROOMS.filter((room) => room.tags.some((tag) => tag.toLowerCase().includes(query.toLowerCase())));
   }, [query]);
 
   const handleSelect = (room: Room) => {
